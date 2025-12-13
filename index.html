@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RP Сервер: Material You Interface</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <style>
+        /* ======================================================= */
+        /* ПАЛИТРА MATERIAL YOU 3: ТЕМНАЯ ТЕМА */
+        /* ======================================================= */
+        :root {
+            --m3-primary: #D0BCFF; /* Основной акцентный цвет */
+            --m3-on-surface: #E6E0E9; /* Основной цвет текста */
+            --m3-surface: #1C1B1F; /* Основной фон */
+            --m3-surface-container-high: #2C2A2E; /* Цвет карточек/фона поиска */
+            --m3-on-surface-variant: #C9C4D0; /* Цвет вторичного текста и иконок */
+            --m3-primary-container: #4F378B; /* Цвет контейнера для активного элемента */
+            --m3-on-primary-container: #EADDFF; /* Цвет текста на активном элементе */
+            --m3-button-radius: 28px;
+            --m3-shape-radius: 16px; 
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--m3-surface);
+            color: var(--m3-on-surface);
+            margin: 0;
+            display: flex; 
+            min-height: 100vh;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+            font-size: 24px;
+        }
+        
+        /* ======================================================= */
+        /* БОКОВАЯ НАВИГАЦИОННАЯ ПАНЕЛЬ (NAVIGATION DRAWER) */
+        /* ======================================================= */
+        .m3-navigation-drawer {
+            width: 300px;
+            background-color: var(--m3-surface);
+            padding: 16px 8px; 
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            gap: 4px; 
+        }
+
+        /* Поле Поиска */
+        .search-field {
+            background-color: var(--m3-surface-container-high);
+            border-radius: var(--m3-button-radius); 
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            color: var(--m3-on-surface-variant);
+        }
+
+        .search-field input {
+            background: none;
+            border: none;
+            color: var(--m3-on-surface);
+            width: 100%;
+            margin-left: 10px;
+            outline: none;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* Элемент Меню */
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--m3-on-surface);
+            border-radius: var(--m3-button-radius); 
+            transition: background-color 0.15s;
+        }
+        
+        .nav-item .material-symbols-outlined {
+            color: var(--m3-on-surface-variant); 
+            margin-right: 16px;
+        }
+
+        /* Стиль для активного элемента (Active Item) */
+        .nav-item.active {
+            background-color: var(--m3-primary-container);
+            color: var(--m3-on-primary-container);
+            font-weight: 500;
+        }
+
+        .nav-item.active .material-symbols-outlined {
+            color: var(--m3-on-primary-container); 
+            font-variation-settings: 'FILL' 1; 
+        }
+
+        .nav-item:not(.active):hover {
+            background-color: rgba(208, 188, 255, 0.08); 
+        }
+        
+        /* Нижняя секция с контролами */
+        .controls-section {
+            margin-top: auto; 
+            display: flex;
+            justify-content: space-around;
+            padding-top: 20px;
+            margin-bottom: 8px; 
+            border-top: 1px solid #363439;
+        }
+
+        .control-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background-color: var(--m3-surface-container-high);
+            border-radius: 50%;
+            color: var(--m3-primary);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        /* ======================================================= */
+        /* ОСНОВНОЙ КОНТЕНТ И СЕКЦИИ */
+        /* ======================================================= */
+        .main-content {
+            padding: 20px 5%;
+            flex-grow: 1;
+        }
+        
+        .m3-card { 
+            background-color: var(--m3-surface-container-high);
+            border-radius: var(--m3-shape-radius);
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin-bottom: 20px;
+        }
+
+        /* Скрытие неактивных страниц */
+        .content-page {
+            display: none;
+        }
+
+        .content-page.visible {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+
+    <aside class="m3-navigation-drawer">
+        
+        <div class="search-field">
+            <span class="material-symbols-outlined">search</span>
+            <input type="text" placeholder="Поиск">
+        </div>
+
+        <a href="#" class="nav-item active" data-page="main">
+            <span class="material-symbols-outlined">home</span>
+            Информация о Проекте
+        </a>
+        
+        <a href="#" class="nav-item" data-page="masters">
+            <span class="material-symbols-outlined">group</span>
+            Список Мастеров
+        </a>
+        
+        <a href="#" class="nav-item" data-page="start">
+            <span class="material-symbols-outlined">login</span>
+            Как начать играть
+        </a>
+        
+        <a href="#" class="nav-item" data-page="rules">
+            <span class="material-symbols-outlined">gavel</span>
+            Правила сервера
+        </a>
+        
+        <a href="#" class="nav-item" data-page="lore">
+            <span class="material-symbols-outlined">menu_book</span>
+            Лор и История
+        </a>
+        
+        <a href="#" class="nav-item" data-page="shop">
+            <span class="material-symbols-outlined">shopping_bag</span>
+            Магазин / Донат
+        </a>
+        
+        <a href="#" class="nav-item" data-page="map">
+            <span class="material-symbols-outlined">map</span>
+            Карта и Территории
+        </a>
+        
+        <a href="#" class="nav-item" data-page="news">
+            <span class="material-symbols-outlined">campaign</span>
+            Новости и Обновления
+        </a>
+        
+        <div class="controls-section">
+            <div class="control-button">
+                 <span class="material-symbols-outlined">settings</span>
+            </div>
+            <div class="control-button">
+                <span class="material-symbols-outlined">volume_up</span>
+            </div>
+            <div class="control-button" style="background-color: var(--m3-primary-container);">
+                 <span class="material-symbols-outlined" style="color: var(--m3-on-primary-container);">logout</span>
+            </div>
+        </div>
+
+    </aside>
+
+    <div class="main-content">
+        
+        <div id="main" class="content-page visible m3-card">
+            <h1>RP Сервер "Название Проекта": Дух СП5</h1>
+            <p style="font-size: 1.1em; color: var(--m3-primary);">
+                ⭐ <strong>Добро пожаловать в мир, вдохновленный лучшими сезонами SP Worlds!</strong>
+            </p>
+            <p>
+                Наш сервер — это масштабный ролевой проект (RP), который воссоздает уникальную атмосферу пятого сезона. Здесь игроки сами творят историю, создают гигантские индустриальные комплексы и влияют на экономику сервера. Это место, где логика и технологии встречаются с глубоким лором и неожиданными сюжетными поворотами.
+            </p>
+            <h3>Ключевые особенности:</h3>
+            <ul>
+                <li>**Глубокое RP:** Отказ от банальных фракций, упор на личные истории.</li>
+                <li>**Технологический Прогресс:** Возможность строить автоматизированные фермы и заводы.</li>
+                <li>**Комьюнити:** Активное сообщество, участвующее в общих событиях и голосовании за изменения.</li>
+            </ul>
+        </div>
+        
+        <div id="masters" class="content-page m3-card">
+            <h1>Список Мастеров</h1>
+            <p>Здесь будут представлены карточки всех действующих Мастеров (игроков) сервера.</p>
+            <p style="color: var(--m3-on-surface-variant);">
+                (Например: Аватар, Никнейм, Титул, Ссылка на канал.)
+            </p>
+        </div>
+        
+        <div id="start" class="content-page m3-card">
+            <h1>Как начать играть</h1>
+            <p>Подробная инструкция о том, как подать заявку, пройти собеседование или купить пропуск на сервер.</p>
+            <p>IP-адрес сервера: <code>play.rpserver.ru</code></p>
+        </div>
+        
+        <div id="rules" class="content-page m3-card">
+            <h1>Устав и Правила</h1>
