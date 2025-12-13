@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RP Сервер: Material You Interface</title>
+    <title>SWRP: Material You Interface</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     
@@ -14,13 +14,13 @@
         /* ПАЛИТРА MATERIAL YOU 3: ТЕМНАЯ ТЕМА */
         /* ======================================================= */
         :root {
-            --m3-primary: #D0BCFF; /* Основной акцентный цвет */
-            --m3-on-surface: #E6E0E9; /* Основной цвет текста */
-            --m3-surface: #1C1B1F; /* Основной фон */
-            --m3-surface-container-high: #2C2A2E; /* Цвет карточек/фона поиска */
-            --m3-on-surface-variant: #C9C4D0; /* Цвет вторичного текста и иконок */
-            --m3-primary-container: #4F378B; /* Цвет контейнера для активного элемента */
-            --m3-on-primary-container: #EADDFF; /* Цвет текста на активном элементе */
+            --m3-primary: #D0BCFF; 
+            --m3-on-surface: #E6E0E9; 
+            --m3-surface: #1C1B1F; 
+            --m3-surface-container-high: #2C2A2E; 
+            --m3-on-surface-variant: #C9C4D0; 
+            --m3-primary-container: #4F378B; 
+            --m3-on-primary-container: #EADDFF; 
             --m3-button-radius: 28px;
             --m3-shape-radius: 16px; 
         }
@@ -132,7 +132,7 @@
         }
         
         /* ======================================================= */
-        /* ОСНОВНОЙ КОНТЕНТ И СЕКЦИИ */
+        /* ОСНОВНОЙ КОНТЕНТ И БАННЕР */
         /* ======================================================= */
         .main-content {
             padding: 20px 5%;
@@ -146,6 +146,39 @@
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             max-width: 800px;
             margin-bottom: 20px;
+        }
+
+        /* Стиль для баннера */
+        .main-banner-container {
+            position: relative;
+            /* Растягивает контейнер до краев карточки */
+            margin: -24px -24px 0 -24px; 
+            overflow: hidden;
+            border-top-left-radius: var(--m3-shape-radius);
+            border-top-right-radius: var(--m3-shape-radius);
+            height: 200px; /* Фиксированная высота баннера */
+            background-color: #363439; /* Цвет на случай, если картинка не загрузится */
+        }
+        
+        .main-banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Заполнение области, обрезая лишнее */
+            opacity: 0.6; /* Небольшая прозрачность для лучшего контраста текста */
+            display: block;
+        }
+        
+        .banner-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3.5em; /* Размер шрифта для названия */
+            color: #EADDFF; 
+            text-shadow: 0 0 15px rgba(208, 188, 255, 0.7);
+            margin: 0;
+            font-weight: 700;
+            z-index: 10;
         }
 
         /* Скрытие неактивных страниц */
@@ -185,17 +218,17 @@
         
         <a href="#" class="nav-item" data-page="rules">
             <span class="material-symbols-outlined">gavel</span>
-            Правила сервера
+            Правила SWRP
         </a>
         
         <a href="#" class="nav-item" data-page="lore">
             <span class="material-symbols-outlined">menu_book</span>
-            Лор и История
+            Лор SWRP
         </a>
         
         <a href="#" class="nav-item" data-page="shop">
             <span class="material-symbols-outlined">shopping_bag</span>
-            Магазин / Донат
+            Магазин SWRP
         </a>
         
         <a href="#" class="nav-item" data-page="map">
@@ -205,7 +238,7 @@
         
         <a href="#" class="nav-item" data-page="news">
             <span class="material-symbols-outlined">campaign</span>
-            Новости и Обновления
+            Новости SWRP
         </a>
         
         <div class="controls-section">
@@ -225,14 +258,21 @@
     <div class="main-content">
         
         <div id="main" class="content-page visible m3-card">
-            <h1>RP Сервер "Название Проекта": Дух СП5</h1>
+            
+            <div class="main-banner-container">
+                <img src="http://googleusercontent.com/image_generation_content/0" alt="Баннер SWRP" class="main-banner-img">
+                <h1 class="banner-title">SWRP</h1>
+            </div>
+            
+            <h1 style="margin-top: 20px;">SWRP: Дух СП5</h1>
+            
             <p style="font-size: 1.1em; color: var(--m3-primary);">
                 ⭐ <strong>Добро пожаловать в мир, вдохновленный лучшими сезонами SP Worlds!</strong>
             </p>
             <p>
                 Наш сервер — это масштабный ролевой проект (RP), который воссоздает уникальную атмосферу пятого сезона. Здесь игроки сами творят историю, создают гигантские индустриальные комплексы и влияют на экономику сервера. Это место, где логика и технологии встречаются с глубоким лором и неожиданными сюжетными поворотами.
             </p>
-            <h3>Ключевые особенности:</h3>
+            <h3>Ключевые особенности SWRP:</h3>
             <ul>
                 <li>**Глубокое RP:** Отказ от банальных фракций, упор на личные истории.</li>
                 <li>**Технологический Прогресс:** Возможность строить автоматизированные фермы и заводы.</li>
@@ -241,7 +281,7 @@
         </div>
         
         <div id="masters" class="content-page m3-card">
-            <h1>Список Мастеров</h1>
+            <h1>Список Мастеров SWRP</h1>
             <p>Здесь будут представлены карточки всех действующих Мастеров (игроков) сервера.</p>
             <p style="color: var(--m3-on-surface-variant);">
                 (Например: Аватар, Никнейм, Титул, Ссылка на канал.)
@@ -249,10 +289,66 @@
         </div>
         
         <div id="start" class="content-page m3-card">
-            <h1>Как начать играть</h1>
+            <h1>Как начать играть на SWRP</h1>
             <p>Подробная инструкция о том, как подать заявку, пройти собеседование или купить пропуск на сервер.</p>
-            <p>IP-адрес сервера: <code>play.rpserver.ru</code></p>
+            <p>IP-адрес сервера: <code>play.swrp-server.ru</code></p>
         </div>
         
         <div id="rules" class="content-page m3-card">
-            <h1>Устав и Правила</h1>
+            <h1>Устав и Правила SWRP</h1>
+            <p>Полный свод правил, включая RP-ограничения, правила строительства и поведения в чате. Отсутствие "гриферства", уважение к лору и постройкам других.</p>
+        </div>
+        
+        <div id="lore" class="content-page m3-card">
+            <h1>Лор и Хроники SWRP</h1>
+            <p>История мира, его ключевые события, легендарные личности и актуальный лор текущего сезона.</p>
+        </div>
+        
+        <div id="shop" class="content-page m3-card">
+            <h1>Магазин "Гильдия Торговцев SWRP"</h1>
+            <p>Здесь находятся ссылки на донат-магазин. Все покупки строго не влияют на RP-баланс и носят косметический характер.</p>
+        </div>
+        
+        <div id="map" class="content-page m3-card">
+            <h1>Интерактивная Карта Мира SWRP</h1>
+            <p>Секция, где будет расположена карта Dynmap или другая интерактивная карта с отметками ключевых построек Мастеров.</p>
+        </div>
+        
+        <div id="news" class="content-page m3-card">
+            <h1>Последние Новости SWRP</h1>
+            <p>Лента новостей: анонсы ивентов, технические обновления и важные голосования сообщества.</p>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('.nav-item');
+            const contentPages = document.querySelectorAll('.content-page');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetPageId = item.getAttribute('data-page');
+
+                    // 1. Деактивировать все кнопки навигации
+                    navItems.forEach(nav => nav.classList.remove('active'));
+
+                    // 2. Активировать нажатую кнопку
+                    item.classList.add('active');
+
+                    // 3. Скрыть все страницы контента
+                    contentPages.forEach(page => page.classList.remove('visible'));
+
+                    // 4. Показать нужную страницу контента
+                    const targetPage = document.getElementById(targetPageId);
+                    if (targetPage) {
+                        targetPage.classList.add('visible');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
