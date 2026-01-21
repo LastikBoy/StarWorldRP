@@ -2,8 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LastikBoy: Ресурсы Разработчика</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>LastikBoy Hub</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -12,304 +12,192 @@
         :root {
             --m3-primary: #D0BCFF; 
             --m3-on-surface: #E6E0E9; 
-            --m3-surface: #1C1B1F; 
-            --m3-surface-container-high: #2C2A2E; 
+            --m3-surface: #0A0A0A; 
+            --m3-surface-container: #1C1B1F; 
+            --m3-surface-container-high: #2B2930; 
             --m3-on-surface-variant: #C9C4D0; 
             --m3-primary-container: #4F378B; 
             --m3-on-primary-container: #EADDFF; 
-            --m3-button-radius: 28px;
-            --m3-shape-radius: 16px; 
         }
 
-        body.light-theme {
-            --m3-primary: #6750A4; 
-            --m3-on-surface: #1C1B1F; 
-            --m3-surface: #FFFBFE; 
-            --m3-surface-container-high: #E6E0E9; 
-            --m3-on-surface-variant: #49454F; 
-            --m3-primary-container: #EADDFF; 
-            --m3-on-primary-container: #21005D;
-        }
+        body { font-family: 'Roboto', sans-serif; background-color: var(--m3-surface); color: var(--m3-on-surface); margin: 0; display: flex; min-height: 100vh; overflow-x: hidden; }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--m3-surface);
-            color: var(--m3-on-surface);
-            margin: 0;
-            display: flex; 
-            min-height: 100vh;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        /* --- ПК: БОКОВАЯ ПАНЕЛЬ --- */
+        /* --- ПК ПАНЕЛЬ --- */
         .m3-navigation-drawer {
-            width: 300px;
-            background-color: var(--m3-surface);
-            padding: 16px 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px; 
-            border-right: 1px solid var(--m3-surface-container-high);
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            box-sizing: border-box;
+            width: 300px; padding: 12px; display: flex; flex-direction: column; gap: 4px; 
+            border-right: 1px solid rgba(255,255,255,0.05); position: sticky; top: 0; height: 100vh; box-sizing: border-box;
         }
 
-        .nav-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 16px;
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--m3-on-surface);
-            border-radius: var(--m3-button-radius);
-            transition: background-color 0.2s;
-        }
+        .nav-item, .mobile-nav-item { cursor: pointer; text-decoration: none; color: inherit; transition: 0.2s; -webkit-tap-highlight-color: transparent; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0; }
+        .active .material-symbols-outlined { font-variation-settings: 'FILL' 1; }
 
+        .nav-item { display: flex; align-items: center; padding: 16px 24px; border-radius: 32px; color: var(--m3-on-surface-variant); }
+        .nav-item.active { background-color: var(--m3-primary-container); color: var(--m3-on-primary-container); }
         .nav-item .material-symbols-outlined { margin-right: 12px; }
-        .nav-item.active {
-            background-color: var(--m3-primary-container);
-            color: var(--m3-on-primary-container);
-            font-weight: 500;
-        }
 
-        /* --- МОБИЛКА: НИЖНЯЯ ПАНЕЛЬ (MD3 STYLE) --- */
-        .mobile-bottom-nav {
-            display: none;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 80px;
-            background-color: var(--m3-surface-container-high);
-            flex-direction: row;
-            justify-content: space-around;
-            align-items: center;
-            z-index: 1000;
-            border-top: 1px solid rgba(255,255,255,0.05);
+        /* --- ANDROID STYLE --- */
+        .m3-android-nav {
+            display: none; position: fixed; bottom: 0; left: 0; right: 0; height: 80px;
+            background: var(--m3-surface-container); justify-content: space-around; align-items: center; z-index: 1000;
+            padding-bottom: env(safe-area-inset-bottom);
         }
+        .m3-android-nav .mobile-nav-item { display: flex; flex-direction: column; align-items: center; flex: 1; gap: 4px; }
+        .m3-android-nav .icon-wrapper { width: 64px; height: 32px; border-radius: 16px; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .m3-android-nav .active .icon-wrapper { background: var(--m3-primary-container); color: var(--m3-on-primary-container); }
 
-        .mobile-nav-item {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            color: var(--m3-on-surface-variant);
-            flex: 1;
-            height: 100%;
+        /* --- ОБНОВЛЕННЫЙ iOS STYLE (Более крупный) --- */
+        .m3-ios-nav {
+            display: none; position: fixed; bottom: 25px; left: 5%; right: 5%; 
+            height: 70px;
+            background: rgba(35, 35, 38, 0.75); 
+            backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border-radius: 35px; justify-content: space-around; align-items: center; 
+            border: 0.5px solid rgba(255,255,255,0.15); z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-
-        .icon-wrapper {
-            width: 64px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 16px;
-            transition: background-color 0.3s, color 0.3s;
+        .m3-ios-nav .mobile-nav-item { 
+            display: flex; flex-direction: column; align-items: center; 
+            flex: 1; opacity: 0.5; gap: 4px;
         }
-
-        .mobile-nav-item.active .icon-wrapper {
-            background-color: var(--m3-primary-container);
-            color: var(--m3-on-primary-container);
-        }
-
-        .mobile-nav-item.active .material-symbols-outlined {
-            font-variation-settings: 'FILL' 1;
-        }
+        .m3-ios-nav .material-symbols-outlined { font-size: 28px; }
+        .m3-ios-nav .active { opacity: 1; color: var(--m3-primary); }
 
         /* --- КОНТЕНТ --- */
-        .main-content {
-            padding: 24px 5%;
-            flex-grow: 1;
-            box-sizing: border-box;
-        }
-
-        .m3-card { 
-            background-color: var(--m3-surface-container-high);
-            border-radius: var(--m3-shape-radius);
-            padding: 24px;
-            max-width: 850px;
-            margin: 0 auto 24px auto;
-        }
-
+        .main-content { padding: 24px 5%; flex-grow: 1; box-sizing: border-box; }
+        .m3-card { background: var(--m3-surface-container-high); border-radius: 28px; padding: 24px; max-width: 850px; margin: 0 auto 24px auto; }
         .content-page { display: none; }
-        .content-page.visible { display: block; }
+        .content-page.visible { display: block; animation: appear 0.3s ease-out; }
+
+        @keyframes appear { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .main-banner-container {
-            height: 180px;
-            background: linear-gradient(135deg, var(--m3-primary-container), #9b82f3);
-            border-radius: var(--m3-shape-radius);
-            margin: -24px -24px 24px -24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            height: 200px;
+            background: url('https://abrakadabra.fun/uploads/posts/2022-02/1645721907_1-abrakadabra-fun-p-krasivie-fioletovie-oboi-na-pk-1.png') no-repeat center center;
+            background-size: cover; border-radius: 24px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .banner-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--m3-on-primary-container);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+        .news-v1-1 { display: flex; background: rgba(255,255,255,0.03); border-radius: 24px; overflow: hidden; margin-top: 20px; border: 1px solid rgba(255,255,255,0.05); }
+        .news-info { flex: 1.2; padding: 20px; }
+        .news-tag { background: var(--m3-primary); color: #21005D; padding: 4px 10px; border-radius: 10px; font-size: 10px; font-weight: 800; display: inline-block; margin-bottom: 10px; }
+        .news-info ul { padding: 0; list-style: none; margin: 0; font-size: 14px; opacity: 0.8; }
+        .news-info li { margin-bottom: 6px; display: flex; align-items: center; }
+        .news-info li::before { content: "star"; font-family: 'Material Symbols Outlined'; font-size: 14px; margin-right: 8px; color: var(--m3-primary); }
+        .news-image { flex: 0.8; background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYrqHfwFsVhIpPHC9_Zz7jiaoW-tBG1oWt3Q&s') center; background-size: cover; }
 
         .link-card {
-            display: flex;
-            align-items: center;
-            padding: 16px;
-            margin-bottom: 12px;
-            background-color: var(--m3-surface); 
-            border-radius: var(--m3-shape-radius);
-            text-decoration: none;
-            color: var(--m3-on-surface);
-            transition: transform 0.2s, background-color 0.2s;
+            display: flex; align-items: center; padding: 16px; margin-bottom: 12px;
+            background-color: rgba(255,255,255,0.03); border-radius: 20px;
+            text-decoration: none; color: inherit; transition: 0.2s;
         }
+        .link-card:hover { background-color: rgba(255,255,255,0.08); transform: scale(1.01); }
+        .link-card .material-symbols-outlined { font-size: 32px; margin-right: 16px; color: var(--m3-primary); }
 
-        .link-card:hover { background-color: rgba(255,255,255,0.05); }
-
-        .link-card .material-symbols-outlined {
-            font-size: 28px;
-            margin-right: 16px;
-            color: var(--m3-primary);
-        }
-
-        .social-link-card { background-color: var(--m3-primary-container); }
-        .social-link-card h3, .social-link-card p, .social-link-card span { color: var(--m3-on-primary-container); }
-
-        /* --- АДАПТИВНОСТЬ --- */
         @media (max-width: 850px) {
-            body { flex-direction: column; }
             .m3-navigation-drawer { display: none; }
-            .mobile-bottom-nav { display: flex; }
-            .main-content { padding: 16px; padding-bottom: 100px; }
-            .banner-title { font-size: 1.8rem; }
+            body.is-android .m3-android-nav { display: flex; }
+            body.is-ios .m3-ios-nav { display: flex; }
+            body:not(.is-ios):not(.is-android) .m3-android-nav { display: flex; }
+            .main-content { padding-bottom: 110px; }
+            .news-v1-1 { flex-direction: column; }
+            .news-image { height: 160px; }
+            .main-banner-container { height: 150px; }
         }
     </style>
 </head>
-<body>
+<body id="body-tag">
 
     <aside class="m3-navigation-drawer">
-        <div style="padding: 16px; font-weight: 700; font-size: 1.3rem; color: var(--m3-primary);">LastikBoy</div>
-        <a href="#" class="nav-item active" data-page="main"><span class="material-symbols-outlined">dashboard</span> Главная</a>
-        <a href="#" class="nav-item" data-page="tools"><span class="material-symbols-outlined">build</span> Образы и Утилиты</a>
-        <a href="#" class="nav-item" data-page="projects"><span class="material-symbols-outlined">apps</span> Софт</a>
-        <a href="#" class="nav-item" data-page="articles"><span class="material-symbols-outlined">article</span> Статьи</a>
+        <div style="padding: 24px; font-weight: 700; font-size: 1.5rem; color: var(--m3-primary);">LastikBoy</div>
+        <a href="#" class="nav-item active" data-page="main"><span class="material-symbols-outlined">home</span> Главная</a>
+        <a href="#" class="nav-item" data-page="os-images"><span class="material-symbols-outlined">album</span> Образы</a>
+        <a href="#" class="nav-item" data-page="apps-only"><span class="material-symbols-outlined">widgets</span> Софт</a>
         <a href="#" class="nav-item" data-page="contact"><span class="material-symbols-outlined">mail</span> Связь</a>
-        
-        <div style="margin-top: auto; padding: 12px;">
-            <button id="theme-toggle" class="nav-item" style="background: none; border: none; width: 100%; cursor: pointer; color: var(--m3-on-surface-variant);">
-                <span class="material-symbols-outlined">contrast</span> Сменить тему
-            </button>
-        </div>
     </aside>
 
-    <nav class="mobile-bottom-nav">
-        <a href="#" class="mobile-nav-item active" data-page="main">
-            <div class="icon-wrapper"><span class="material-symbols-outlined">dashboard</span></div>
-        </a>
-        <a href="#" class="mobile-nav-item" data-page="tools">
-            <div class="icon-wrapper"><span class="material-symbols-outlined">build</span></div>
-        </a>
-        <a href="#" class="mobile-nav-item" data-page="projects">
-            <div class="icon-wrapper"><span class="material-symbols-outlined">apps</span></div>
-        </a>
-        <a href="#" class="mobile-nav-item" data-page="articles">
-            <div class="icon-wrapper"><span class="material-symbols-outlined">article</span></div>
-        </a>
-        <a href="#" class="mobile-nav-item" data-page="contact">
-            <div class="icon-wrapper"><span class="material-symbols-outlined">mail</span></div>
-        </a>
+    <nav class="m3-android-nav">
+        <a href="#" class="mobile-nav-item active" data-page="main"><div class="icon-wrapper"><span class="material-symbols-outlined">home</span></div><span style="font-size:12px">Главная</span></a>
+        <a href="#" class="mobile-nav-item" data-page="os-images"><div class="icon-wrapper"><span class="material-symbols-outlined">album</span></div><span style="font-size:12px">Образы</span></a>
+        <a href="#" class="mobile-nav-item" data-page="apps-only"><div class="icon-wrapper"><span class="material-symbols-outlined">widgets</span></div><span style="font-size:12px">Софт</span></a>
+        <a href="#" class="mobile-nav-item" data-page="contact"><div class="icon-wrapper"><span class="material-symbols-outlined">mail</span></div><span style="font-size:12px">Связь</span></a>
+    </nav>
+
+    <nav class="m3-ios-nav">
+        <a href="#" class="mobile-nav-item active" data-page="main"><span class="material-symbols-outlined">home</span><span style="font-size:11px">Главная</span></a>
+        <a href="#" class="mobile-nav-item" data-page="os-images"><span class="material-symbols-outlined">album</span><span style="font-size:11px">Образы</span></a>
+        <a href="#" class="mobile-nav-item" data-page="apps-only"><span class="material-symbols-outlined">widgets</span><span style="font-size:11px">Софт</span></a>
+        <a href="#" class="mobile-nav-item" data-page="contact"><span class="material-symbols-outlined">mail</span><span style="font-size:11px">Связь</span></a>
     </nav>
 
     <main class="main-content">
-        
         <div id="main" class="content-page visible m3-card">
-            <div class="main-banner-container"><h1 class="banner-title">LASTIK BOY</h1></div>
-            <h2>👋 Привет!</h2>
-            <p>Я LastikBoy. Здесь собраны все мои проекты, кастомные сборки Windows и полезный софт.</p>
-            <p>Используйте меню слева (на ПК) или снизу (на смартфоне) для навигации.</p>
+            <div class="main-banner-container"></div>
+            <h2>👋 Добро пожаловать!</h2>
+            <div class="news-v1-1">
+                <div class="news-info">
+                    <span class="news-tag">НОВОЕ V1.1</span>
+                    <h3>Интеллектуальный UI</h3>
+                    <ul>
+                        <li>Адаптация под Android (M3) и iOS</li>
+                        <li>Разделение категорий контента</li>
+                        <li>Улучшенный iOS Liquid Bar</li>
+                    </ul>
+                </div>
+                <div class="news-image"></div>
+            </div>
         </div>
 
-        <div id="tools" class="content-page m3-card">
-            <h1>Образы ОС и Утилиты</h1>
+        <div id="os-images" class="content-page m3-card">
+            <h1>💿 Образы ОС</h1>
             <a href="https://pixeldrain.com/u/JrXsz7kN" target="_blank" class="link-card">
                 <span class="material-symbols-outlined">memory</span>
-                <div><h3>MakuOS 11 24h2</h3><p>Оптимизированная сборка для гейминга и работы.</p></div>
+                <div><h3>MakuOS 11 24h2</h3><p>Оптимизированная сборка для гейминга.</p></div>
             </a>
             <a href="https://pixeldrain.com/u/6aCam7Zz" target="_blank" class="link-card">
                 <span class="material-symbols-outlined">desktop_windows</span>
-                <div><h3>MakuOS 11 Lite 22h2</h3><p>Максимально легкая версия для слабых систем.</p></div>
+                <div><h3>MakuOS 11 Lite 22h2</h3><p>Максимально легкая версия системы.</p></div>
             </a>
         </div>
 
-        <div id="projects" class="content-page m3-card">
-            <h1>Приложения и Софт</h1>
+        <div id="apps-only" class="content-page m3-card">
+            <h1>🚀 Приложения</h1>
             <a href="https://github.com/Flowseal/zapret-discord-youtube/releases" target="_blank" class="link-card">
                 <span class="material-symbols-outlined">vpn_key</span>
-                <div><h3>Zapret</h3><p>Инструмент для обхода блокировок Discord и YouTube.</p></div>
+                <div><h3>Zapret</h3><p>Инструмент для Discord и YouTube.</p></div>
             </a>
             <a href="https://git.astralium.su/didirus/AstralRinth/releases" target="_blank" class="link-card">
                 <span class="material-symbols-outlined">extension</span>
-                <div><h3>AstralRinth</h3><p>Продвинутый лаунчер Minecraft.</p></div>
+                <div><h3>AstralRinth</h3><p>Продвинутый лаунчер для Minecraft.</p></div>
             </a>
-            <a href="https://t.me/swpscitycom" target="_blank" class="link-card social-link-card">
-                <span class="material-symbols-outlined">phone_android</span>
-                <div><h3>LastikTech (Telegram)</h3><p>Мобильный софт и полезные моды тут.</p></div>
-            </a>
-        </div>
-
-        <div id="articles" class="content-page m3-card">
-            <h1>Статьи</h1>
-            <p>Раздел находится в разработке. Скоро здесь появятся гайды по оптимизации ПК.</p>
         </div>
 
         <div id="contact" class="content-page m3-card">
-            <h1>Связь</h1>
-            <a href="https://t.me/LastikBoy" target="_blank" class="link-card social-link-card">
+            <h1>📬 Связь</h1>
+            <a href="https://t.me/LastikBoy" target="_blank" class="link-card">
                 <span class="material-symbols-outlined">send</span>
-                <div><h3>Написать в Telegram</h3><p>@LastikBoy</p></div>
-            </a>
-            <a href="https://github.com/LastikBoy" target="_blank" class="link-card">
-                <span class="material-symbols-outlined">code</span>
-                <div><h3>Мой GitHub</h3><p>Исходники и проекты.</p></div>
+                <div><h3>Telegram</h3><p>@LastikBoy</p></div>
             </a>
         </div>
-
     </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const allNavLinks = document.querySelectorAll('.nav-item, .mobile-nav-item');
-            const contentPages = document.querySelectorAll('.content-page');
+        const body = document.getElementById('body-tag');
+        const ua = navigator.userAgent.toLowerCase();
+        if (/iphone|ipad|ipod/.test(ua)) body.classList.add('is-ios');
+        else if (/android/.test(ua)) body.classList.add('is-android');
 
-            // --- ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ---
-            allNavLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    const targetPage = link.getAttribute('data-page');
-                    if (!targetPage) return; // Если это кнопка темы
-                    
-                    e.preventDefault();
+        const links = document.querySelectorAll('.nav-item, .mobile-nav-item');
+        const pages = document.querySelectorAll('.content-page');
 
-                    // 1. Обновляем активный класс у ВСЕХ меню сразу
-                    allNavLinks.forEach(l => l.classList.remove('active'));
-                    document.querySelectorAll(`[data-page="${targetPage}"]`).forEach(l => l.classList.add('active'));
-
-                    // 2. Показываем нужную страницу
-                    contentPages.forEach(page => {
-                        page.classList.remove('visible');
-                        if (page.id === targetPage) page.classList.add('visible');
-                    });
-
-                    // 3. Плавный скролл вверх
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            });
-
-            // --- ТЕМА ---
-            document.getElementById('theme-toggle').addEventListener('click', () => {
-                document.body.classList.toggle('light-theme');
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = link.getAttribute('data-page');
+                links.forEach(l => l.classList.remove('active'));
+                document.querySelectorAll(`[data-page="${pageId}"]`).forEach(l => l.classList.add('active'));
+                pages.forEach(p => p.classList.remove('visible'));
+                document.getElementById(pageId).classList.add('visible');
+                if (window.navigator.vibrate) window.navigator.vibrate(5);
             });
         });
     </script>
